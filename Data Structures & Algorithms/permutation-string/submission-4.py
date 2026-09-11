@@ -1,0 +1,16 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        left = 0
+        freq = Counter(s1)
+        n = len(s1)
+        if n > len(s2):
+            return False
+        for right, char in enumerate(s2):
+            freq[char] = freq.get(char, 0) - 1
+            while freq[char] < 0:
+                freq[s2[left]] += 1
+                left += 1
+            if (right - left + 1 == n):
+                return True
+        return False
+        
